@@ -1,12 +1,12 @@
-from launch import EVAL_SET
-from arc.agent import ArcAgent
+from arc.data import eval_set
+from arc.agents import ArcAgent
 import numpy as np
 
 MAX_ATTEMPTS = 3
 
-def eval(agent: ArcAgent):
+def arc_eval(agent: ArcAgent, problems = eval_set):
     results = []
-    for prob in EVAL_SET:
+    for prob in problems:
 
         pred = agent.predict(prob.train_pairs, [p.x for p in prob.test_pairs])
         assert len(pred) == len(prob.test_pairs), (
@@ -23,16 +23,16 @@ def eval(agent: ArcAgent):
 
 
 if __name__ == '__main__':
-    from arc.agent import RandomAgent, CheatingAgent
+    from arc.agents import RandomAgent, CheatingAgent
 
     agent = RandomAgent()
-    results = eval(agent)
+    results = arc_eval(agent)
 
     from collections import Counter
     print("Results for a random agent:", Counter(results))
 
     agent = CheatingAgent()
-    results = eval(agent)
+    results = arc_eval(agent)
 
     from collections import Counter
 

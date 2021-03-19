@@ -4,15 +4,17 @@ from typing import List
 
 import numpy as np
 
-from arc.data_model import ArcIOPair, ArcProblem
+from arc.types import ArcIOPair, ArcProblem, ArcGrid, verify_is_arc_grid
 
 
-def parse_json_grid(grid: List[List[int]]) -> np.ndarray:
+def parse_json_grid(grid: List[List[int]]) -> ArcGrid:
     rows = []
     for row in grid:
         rows.append(np.array(row))
 
-    return np.vstack(rows)
+    result = np.vstack(rows)
+    verify_is_arc_grid(result)
+    return result
 
 
 def parse_dir(d) -> List[ArcProblem]:
@@ -23,12 +25,17 @@ def parse_dir(d) -> List[ArcProblem]:
             parsed = json.load(f)
 
             train = parsed["train"]
-            train_pairs = parse_group(train)
+            demo_pairs = parse_group(train)
 
             test = parsed["test"]
             test_pairs = parse_group(test)
-
-            cases.append(ArcProblem(train_pairs, test_pairs))
+            cases.append(
+                ArcProblem(
+                    demo_pairs=demo_pairs,
+                    test_pairs=test_pairs,
+                    uid=file.replace(".json", ""),
+                )
+            )
     return cases
 
 

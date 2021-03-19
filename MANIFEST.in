@@ -1,0 +1,2 @@
+include arc/original/ARC/data/training/*.json
+include arc/original/ARC/data/evaluation/*.json
