@@ -37,7 +37,7 @@ def describe_task_set(arc_task_set):
 
     from collections import Counter
 
-    print("Describing an ARC task set.")
+    print("\nDescribing an ARC task set.")
     print("Number of tasks:", len(arc_task_set))
     print("Number of demonstrations per task:", Counter(number_examples))
     print("Number of tests per task:", Counter(number_queries))

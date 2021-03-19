@@ -12,7 +12,7 @@ def parse_json_grid(grid: List[List[int]]) -> ArcGrid:
     for row in grid:
         rows.append(np.array(row))
 
-    result = np.vstack(rows)
+    result = np.vstack(rows).astype(np.uint8)
     verify_is_arc_grid(result)
     return result
 
