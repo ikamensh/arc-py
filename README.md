@@ -27,12 +27,10 @@ for n, task in enumerate(train_set, start=1):
     for i, pair in enumerate(task.test_pairs, start=1):
         pair.plot(show=True, title=f"Task {n}: Test {i}")
 ```
-Output example:
-![Alt Task 1 example](res/task1_demo1.png?raw=true "Task 1 example")
-![Alt Task 1 example](res/task1_demo2.png?raw=true "Task 1 example") 
-![Alt Task 1 example](res/task1_test1.png?raw=true "Task 1 example")
 
-
+![Alt Task 1 example1](res/task1_demo1.png?raw=true "Task 1 example 1")
+![Alt Task 1 example2](res/task1_demo2.png?raw=true "Task 1 example 2") 
+![Alt Task 1 example3](res/task1_test1.png?raw=true "Task 1 test 1")
 
 > Note: The ARC challenge is designed for the developer not knowing the test problems. If you know those problems, you will overfit to them. We recommend not to view the evaluation set.
 
