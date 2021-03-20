@@ -54,3 +54,6 @@ class CheatingAgent(ArcAgent):
         for tg in test_grids:
             outputs.append([self.answers[tg.tobytes()]])
         return outputs
+
+
+__all__ = [ ArcAgent, RandomAgent, CheatingAgent ]

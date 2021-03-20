@@ -50,3 +50,9 @@ if __name__ == "__main__":
 
     print("\nEval")
     describe_task_set(eval_set)
+
+    for task in train_set:
+        for pair in task.train_pairs:
+            pair.plot()
+            break
+        break

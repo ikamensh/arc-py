@@ -31,12 +31,11 @@ class ArcIOPair:
         self.y = y
 
     def plot(self, show=True):
-        if self.y is not None:
-            fig, (ax1, ax2) = plt.subplots(1, 2)
-            plot_grid(ax1, self.x)
-            plot_grid(ax2, self.y)
-        else:
-            plot_grid(plt, self.x)
+        fig, (ax1, ax2) = plt.subplots(1, 2)
+        plot_grid(ax1, self.x)
+        ax1.set_title("Input")
+        plot_grid(ax2, self.y)
+        ax2.set_title("Output")
 
         if show:
             plt.show()
@@ -60,3 +59,11 @@ class ArcProblem:
         self.uid = uid
         self.train_pairs = demo_pairs
         self.test_pairs = test_pairs
+
+    @property
+    def test_inputs(self):
+        return [p.x for p in self.test_pairs]
+
+    @property
+    def test_outputs(self):
+        return [p.y for p in self.test_pairs]

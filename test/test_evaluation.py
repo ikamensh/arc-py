@@ -1,14 +1,17 @@
 from arc.agents import RandomAgent, CheatingAgent
-from arc.evaluation import arc_eval
+from arc.evaluation import evaluate_agent
 
 
 def test_random_agent():
     agent = RandomAgent()
-    results = arc_eval(agent)
-    assert sum(results) < len(results) // 2
+    results = evaluate_agent(agent)
+    assert results.accuracy < 0.5
+    assert results.accuracy_any < 0.5
 
 
 def test_cheating_agent():
     agent = CheatingAgent()
-    results = arc_eval(agent)
-    assert sum(results) > len(results) // 2
+    results = evaluate_agent(agent)
+    assert results.accuracy > 0.99
+    assert results.accuracy_any > 0.99
+    assert results.shape_accuracy > 0.99
