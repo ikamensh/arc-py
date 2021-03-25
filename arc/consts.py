@@ -1,7 +1,7 @@
 from matplotlib.colors import ListedColormap
 
 # RGB
-colors = {
+colors_rgb = {
     0: (0x00, 0x00, 0x00),
     1: (0x00, 0x74, 0xD9),
     2: (0xFF, 0x41, 0x36),
@@ -14,5 +14,17 @@ colors = {
     9: (0x87, 0x0C, 0x25),
 }
 
-_float_colors = [tuple(c / 255 for c in col) for col in colors.values()]
+_float_colors = [tuple(c / 255 for c in col) for col in colors_rgb.values()]
 arc_cmap = ListedColormap(_float_colors)
+
+class ArcColors:
+    BLACK = 0
+    BLUE = 1
+    RED = 2
+    GREEN = 3
+    YELLOW = 4
+    GREY = 5
+    FUCHSIA = 6
+    ORANGE = 7
+    TEAL = 8
+    BROWN = 9
