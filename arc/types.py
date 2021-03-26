@@ -70,3 +70,7 @@ class ArcProblem:
     @property
     def test_outputs(self):
         return [p.y for p in self.test_pairs]
+
+
+    def __repr__(self):
+        return f"ArcProblem # {self.uid}"

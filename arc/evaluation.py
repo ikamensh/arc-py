@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import List, Dict, Set
 
 from arc.data import eval_set
 from arc.types import ArcProblem, ArcPrediction
@@ -10,14 +10,11 @@ MAX_ATTEMPTS = 3
 
 
 class ArcEvaluationResult:
-    def __init__(self, raw_answers: Dict[ArcProblem, ArcPrediction] = None):
-        self.raw_answers = raw_answers or {}
-        self.correct = set()
-        self.partially_correct = set()
+    def __init__(self):
+        self.raw_answers: Dict[ArcProblem, ArcPrediction] = {}
+        self.correct: Set[ArcProblem] = set()
+        self.partially_correct: Set[ArcProblem] = set()
         self.correct_shape: Dict[ArcProblem, Fraction] = {}
-        self.accuracy = None
-        self.accuracy_any = None
-        self.shape_accuracy = None
 
     def add_answer(self, prob: ArcProblem, pred: List[ArcPrediction]) -> None:
         assert len(pred) == len(prob.test_pairs), (
@@ -28,7 +25,7 @@ class ArcEvaluationResult:
         tests_successful = []
         right_shapes = []
         for answer_grid, solution in zip(prob.test_outputs, pred):
-            success = any(np.all(s == answer_grid) for s in solution[:MAX_ATTEMPTS])
+            success = any(s.shape == answer_grid.shape and np.all(s == answer_grid) for s in solution[:MAX_ATTEMPTS])
             tests_successful.append(success)
             right_shapes.append(
                 Fraction(
@@ -43,15 +40,20 @@ class ArcEvaluationResult:
         elif any(tests_successful):
             self.partially_correct.add(prob)
 
-        self.accuracy = None
-        self.accuracy_any = None
-        self.shape_accuracy = None
-
-    def compute_scores(self):
+    @property
+    def accuracy(self):
         N = len(self.raw_answers)
-        self.accuracy = len(self.correct) / N
-        self.accuracy_any = self.accuracy + len(self.partially_correct) / N
-        self.shape_accuracy = sum(self.correct_shape.values()) / N
+        return len(self.correct) / N
+
+    @property
+    def accuracy_any(self):
+        N = len(self.raw_answers)
+        return self.accuracy + len(self.partially_correct) / N
+
+    @property
+    def shape_accuracy(self):
+        N = len(self.raw_answers)
+        return sum(self.correct_shape.values()) / N
 
     def __repr__(self):
         return (
@@ -70,7 +72,6 @@ def evaluate_agent(
         pred = agent.predict(prob.train_pairs, prob.test_inputs)
         result.add_answer(prob, pred)
 
-    result.compute_scores()
     return result
 
 

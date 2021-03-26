@@ -8,7 +8,7 @@ drop_prob = get_train_problem_by_uid("54d82841")
 
 
 def test_axes():
-    """expects to have origin in upper-left corner, x axis to go down, y axis to go right.
+    """expects to have origin in upper-left corner, axis_0 to go down, axis_1 to go right.
 
     See the drop problem in ARC web interface for reference."""
 
