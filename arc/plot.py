@@ -2,7 +2,6 @@ import numpy as np
 
 from arc.consts import arc_cmap
 
-
 def plot_grid(plot_handle, grid: np.ndarray):
     plot_handle.pcolormesh(
         grid,
@@ -15,3 +14,4 @@ def plot_grid(plot_handle, grid: np.ndarray):
     plot_handle.set_yticks(np.arange(0, grid.shape[0], 1))
     plot_handle.grid()
     plot_handle.set_aspect(1)
+    plot_handle.invert_yaxis()
