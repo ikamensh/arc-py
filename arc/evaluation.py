@@ -25,7 +25,10 @@ class ArcEvaluationResult:
         tests_successful = []
         right_shapes = []
         for answer_grid, solution in zip(prob.test_outputs, pred):
-            success = any(s.shape == answer_grid.shape and np.all(s == answer_grid) for s in solution[:MAX_ATTEMPTS])
+            success = any(
+                s.shape == answer_grid.shape and np.all(s == answer_grid)
+                for s in solution[:MAX_ATTEMPTS]
+            )
             tests_successful.append(success)
             right_shapes.append(
                 Fraction(

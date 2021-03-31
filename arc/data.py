@@ -7,8 +7,9 @@ from arc.version import __version__
 from arc.read import parse_dir
 
 here = os.path.dirname(__file__)
-train_dir = os.path.join(here, "original", "ARC", "data", "training")
-eval_dir = os.path.join(here, "original", "ARC", "data", "evaluation")
+json_sources_folder = os.path.join(here, "original", "ARC", "data")
+train_data_dir = os.path.join(json_sources_folder, "training")
+eval_data_dir = os.path.join(json_sources_folder, "evaluation")
 cache_dir = appdirs.user_cache_dir("arc-py", "ikamensh")
 cache_file = os.path.join(cache_dir, f"arc-py.{__version__}.cache")
 
@@ -16,8 +17,8 @@ if os.path.isfile(cache_file):
     with open(cache_file, "rb") as f:
         train_set, eval_set = pickle.load(f)
 else:
-    train_set = parse_dir(train_dir)
-    eval_set = parse_dir(eval_dir)
+    train_set = parse_dir(train_data_dir)
+    eval_set = parse_dir(eval_data_dir)
     os.makedirs(cache_dir, exist_ok=True)
     with open(cache_file, "wb") as f:
         pickle.dump((train_set, eval_set), f)
