@@ -3,7 +3,7 @@ from abc import ABC
 
 import numpy as np
 
-from arc.data import eval_set
+from arc.data import validation_problems
 from arc.types import ArcIOPair, ArcGrid, ArcPrediction
 
 
@@ -43,7 +43,7 @@ class CheatingAgent(ArcAgent):
 
     def __init__(self):
         self.answers = {}
-        for prob in eval_set:
+        for prob in validation_problems:
             for pair in prob.test_pairs:
                 self.answers[pair.x.tobytes()] = np.copy(pair.y)
 

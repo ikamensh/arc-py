@@ -11,14 +11,14 @@ def no_cache():
 
 
 def test_eval_set(no_cache):
-    from arc import eval_set, describe_task_set
+    from arc import validation_problems, describe_task_group
 
-    assert len(eval_set) == 400
-    describe_task_set(eval_set)
+    assert len(validation_problems) == 400
+    describe_task_group(validation_problems)
 
 
 def test_train_set(no_cache):
-    from arc import train_set, describe_task_set
+    from arc import train_problems, describe_task_group
 
-    assert len(train_set) == 400
-    describe_task_set(train_set)
+    assert len(train_problems) == 400
+    describe_task_group(train_problems)

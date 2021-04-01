@@ -1,6 +1,6 @@
 from typing import List, Dict, Set
 
-from arc.data import eval_set
+from arc.data import validation_problems
 from arc.types import ArcProblem, ArcPrediction
 from arc.agents import ArcAgent
 from fractions import Fraction
@@ -68,8 +68,10 @@ class ArcEvaluationResult:
 
 
 def evaluate_agent(
-    agent: ArcAgent, problems: List[ArcProblem] = eval_set
+    agent: ArcAgent, problems: List[ArcProblem] = validation_problems
 ) -> ArcEvaluationResult:
+    """Evaluate  given agent on the provided list of problems. """
+
     result = ArcEvaluationResult()
     for prob in problems:
         pred = agent.predict(prob.train_pairs, prob.test_inputs)
