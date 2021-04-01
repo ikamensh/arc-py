@@ -35,9 +35,9 @@ class ArcIOPair:
         fig, (ax1, ax2) = fig_axes or plt.subplots(1, 2)
         if title:
             fig.suptitle(title, fontsize=16)
-        plot_grid(ax1, self.x)
+        plot_grid(self.x,  ax1)
         ax1.set_title("Input")
-        plot_grid(ax2, self.y)
+        plot_grid(self.y, ax2)
         ax2.set_title("Output")
 
         if show:

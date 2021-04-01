@@ -23,6 +23,27 @@ These are available as `from arc import train_problems, validation_problems`.
 * `arc.types.ArcIOPair` is a unit of the demonstrations/tests  making up a  problem  -  it's the  input  grid  (`pair.x`) and corresponding output grid (`pair.y`).
 * `arc.types.ArcGrid` is an alias for `np.ndarray`. Specifically, an ArcGrid must be 2D, have dimensions between 1 to 30 each, and only have integers in range [0, 9] as it's elements. To verify some numpy array complies with this spec, a check function is offered: `arc.types.verify_is_arc_grid`.
 
+## Viewing data with matplotlib
+
+arc-py provides few basics to view the grids with matplotlib (consistent with the web view in the original repo):
+* `arc.plot.plot_grid` can plot a single 2D grid
+* `arc.types.ArcIOPair.plot()` will show a input/output pair
+
+```python
+import numpy as np
+from matplotlib import pyplot as plt
+from arc.plot import plot_grid
+
+
+grid = np.zeros([4,4], dtype=np.uint8)
+
+for i in range(4):
+    grid[i,i] = 3
+
+plot_grid(grid)
+plt.show()
+```
+
 ## Constructing agents and evaluating results
 
 ### Agent API

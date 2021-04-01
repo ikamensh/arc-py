@@ -1,8 +1,13 @@
 import numpy as np
+from matplotlib import pyplot as plt
 
 from arc.consts import arc_cmap
 
-def plot_grid(plot_handle, grid: np.ndarray):
+def plot_grid(grid: np.ndarray, plot_handle = None):
+    if plot_handle is None:
+        fig, ax = plt.subplots()
+        plot_handle = ax
+
     plot_handle.pcolormesh(
         grid,
         cmap=arc_cmap,
