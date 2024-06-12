@@ -31,7 +31,7 @@ def parse_dir(d) -> List[ArcProblem]:
             test_pairs = parse_group(test)
             cases.append(
                 ArcProblem(
-                    demo_pairs=demo_pairs,
+                    train_pairs=demo_pairs,
                     test_pairs=test_pairs,
                     uid=file.replace(".json", ""),
                 )

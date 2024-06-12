@@ -57,10 +57,10 @@ class ArcProblem:
     """
 
     def __init__(
-        self, uid: str, demo_pairs: List[ArcIOPair], test_pairs: List[ArcIOPair]
+        self, uid: str, train_pairs: List[ArcIOPair], test_pairs: List[ArcIOPair]
     ):
         self.uid = uid
-        self.train_pairs = demo_pairs
+        self.train_pairs = train_pairs
         self.test_pairs = test_pairs
 
     @property
