@@ -1,15 +1,16 @@
 import os
 import pickle
+from pathlib import Path
 
 import appdirs
 
 from arc.version import __version__
 from arc.read import parse_dir
 
-here = os.path.dirname(__file__)
-json_sources_folder = os.path.join(here, "original", "ARC", "data")
-train_data_dir = os.path.join(json_sources_folder, "training")
-valid_data_dir = os.path.join(json_sources_folder, "evaluation")
+here = Path(__file__).parent
+json_sources_folder = here / "original"
+train_data_dir = json_sources_folder / "training"
+valid_data_dir = json_sources_folder / "evaluation"
 cache_dir = appdirs.user_cache_dir("arc-py", "ikamensh")
 cache_file = os.path.join(cache_dir, f"arc-py.{__version__}.cache")
 
